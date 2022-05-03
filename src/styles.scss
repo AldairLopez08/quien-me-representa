@@ -1,1 +1,93 @@
 /* You can add global styles to this file, and also import other style files */
+html,body{
+    margin: 10px;
+    background-color: var(--surface-b);
+    font-family: var(--font-family); 
+}
+header{
+    margin: -20px;
+}
+.text-layout{
+    color: var(--text-color)
+}
+.centrado{
+    text-align: center;
+}
+.derecha{
+    text-align: right;
+}
+.izquierda{
+    text-align: left;
+}
+.justificado{
+    text-align: justify;
+}
+#sidebar{
+    height: 100%;
+    min-height: 71vh;
+    min-width: 20%;
+    background-color:azure;
+}
+.PAN{
+    color: #008dd0;
+}
+.PRI{
+    color: #00a651;
+}
+.MORENA{
+    color: #cd213a; 
+}
+.PRD{
+    color: #ffd200;
+ }
+.VERDE{
+    color:#88c243;
+}
+.RSP{
+    color: #e62b35;
+}
+.MC{
+    color: #f58320;
+}
+.LUPE{
+    color: #d38040;
+}
+.NUEVA_ALIANZA{
+    color:#0099a7;
+}
+.facebook{
+    color:  #3b5998;
+}
+.twitter{
+    color: #00acee;
+}
+.instagram{
+    color: #8a3ab9;
+}
+.youtube{
+    color: #cd213a;
+}
+.ieeg{
+    color: var(--primary-color);
+    caret-color: var(--text-color);
+}
+.custom-chip {
+    border-radius: 5px;
+    padding: 4px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: var(--surface-b);
+    color: var(--text-color);
+    border-color: var(--primary-color);
+}
+.eliminar:empty{
+    display:none;
+}
+@media screen and (max-width: 600px) {
+.ocultar-div
+    {
+        display:none;
+    }
+}
+
+@import url("https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");

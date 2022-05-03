@@ -1,0 +1,247 @@
+<div><br></div>
+
+<mat-grid-list cols="1" *ngIf="!autoridad; else divAutoridad">
+    <mat-grid-tile>
+        <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #divAutoridad>
+    <!-- <h1>{{autoridad.nombre}}</h1> -->
+    <div fxLayout="row"
+         fxLayout.md="row"
+         fxLayout.sm="row"
+         fxLayout.xs="column"
+         class="text-layout">
+
+         <div fxFlex="25"
+              fxFlex.md="30"
+              fxFlex.sm="40"
+              class="estilo centrado">
+
+              <div fxFlex="95"
+                   fxFlex.md="95"
+                   fxFlex.sm="95"
+                   fxFlex.xs="100">
+
+                   <h1>{{autoridad.cargo}}</h1>
+                   <mat-divider></mat-divider>
+                   <br>
+                   <mat-card class="estilo">
+                       <img [src]="autoridad | imagen" 
+                            mat-card-avatar 
+                            class="animate__animated animate__zoomIn"
+                            >    
+                       <h2>{{autoridad.nombre}}</h2>
+                       <mat-divider></mat-divider>
+
+                       <mat-card-actions >
+                        <a [href]="autoridad.redes_sociales.facebook" target="_blank">
+                            <button mat-button *ngIf="autoridad.redes_sociales.facebook">
+                                <i class="pi pi-facebook facebook" style="font-size: 1.5rem"></i>
+                            </button>
+                        </a> 
+                        <a [href]="autoridad.redes_sociales.twitter" target="_blank">
+                            <button mat-button *ngIf="autoridad.redes_sociales.twitter">
+                                <i class="pi pi-twitter twitter" style="font-size: 1.5rem"></i>
+                            </button>
+                        </a>
+                        <a [href]="autoridad.redes_sociales.instagram" target="_blank">
+                            <button mat-button *ngIf="autoridad.redes_sociales.instagram">
+                                <i class="pi pi-instagram instagram" style="font-size: 1.5rem"></i>
+                            </button>
+                        </a>       
+                        <a [href]="autoridad.redes_sociales.youtube" target="_blank">
+                            <button mat-button *ngIf="autoridad.redes_sociales.youtube">
+                                <i class="pi pi-youtube youtube" style="font-size: 1.5rem"></i>
+                            </button>
+                        </a> 
+                        <!-- <a [href]="autoridad.redes_sociales.portal_personal" target="_blank">
+                            <button mat-button *ngIf="autoridad.redes_sociales.portal_personal">
+                                <i class="pi pi-globe" style="font-size: 1.5rem"></i>
+                            </button>
+                        </a> -->
+                        
+                    </mat-card-actions>
+
+                    <mat-divider></mat-divider>
+                        <br>
+                    <div fxLayout="row"
+                         fxLayout.md="row"
+                         fxLayout.sm="row"
+                         fxLayout.xs="column"
+                         class="text-layout">
+                        
+                        <div fxFlex="25"
+                             fxFlex.md="30"
+                             fxFlex.sm="40">
+                            <img class="logoPartidoPolitico justificado" 
+                                [src]="autoridad | logo">
+                        </div>
+                        <div fxFlex="75"
+                             fxFlex.md="70"
+                             fxFlex.sm="60">
+                            <h3 [class]="autoridad.partido_politico.nombre_partido">
+                                {{autoridad.partido_politico.nombre_completo}}
+                            </h3>
+                        </div>
+                    </div>
+
+                        
+                   </mat-card>
+                   
+              </div>
+           
+         </div>
+
+         <div fxFlex="75"
+              fxFlex.md="70"
+              fxFlex.sm="60"
+              class="estilo">
+
+            <h1>{{autoridad.autoridad}}</h1>
+            <app-buscar></app-buscar>
+            <mat-divider></mat-divider>
+            
+            <br>
+            <div fxLayout="row wrap"
+                 fxLayout.xs="column"
+                 fxLayoutAlign="center"
+                 fxLayoutGap="20px">
+                
+                <div fxFlex="90"
+                        fxFlex.md="90"
+                        fxFlex.sm="100"
+                        class="p-panel">
+                    
+                    <p-card *ngIf="autoridad.datos_generales.pregunta_1">
+                        <div fxLayout="row wrap"
+                        fxLayout.xs="column"
+                        fxLayoutAlign="center"
+                        fxLayoutGap="20px">
+                            <div fxFlex="30"
+                                    fxFlex.md="30"
+                                    fxFlex.sm="30"
+                                    class="izquierda">
+                                    <img [src]="autoridad | ayuntamiento"
+                                    *ngIf="autoridad.ayuntamiento">
+                                    
+                                <img src="assets/images/general/ieeg.jpg"
+                                width="200px"
+                                *ngIf="!autoridad.ayuntamiento">
+
+                            </div>
+                            <div fxFlex="60"
+                                    fxFlex.md="60"
+                                    fxFlex.sm="60">
+                                    <strong *ngIf="autoridad.ayuntamiento">{{autoridad.ayuntamiento.nombre_ayuntamiento | uppercase}}</strong>
+                                    <h1><strong class="ieeg">{{autoridad.datos_generales.pregunta_1 | uppercase}}</strong></h1>
+                                    <p class="justificado">
+                                        {{autoridad.datos_generales.respuesta_1}}
+                                    </p>
+                            </div>
+                        </div>
+                    </p-card>
+
+                </div>
+                <div fxFlex="90"
+                        fxFlex.md="90"
+                        fxFlex.sm="100"
+                        class="p-panel">
+
+                        <p-card *ngIf="autoridad.datos_generales.pregunta_2">
+                        <div fxLayout="row wrap"
+                        fxLayout.xs="column"
+                        fxLayoutAlign="center"
+                        fxLayoutGap="20px">
+                            <div fxFlex="30"
+                                    fxFlex.md="30"
+                                    fxFlex.sm="30">
+
+                                <img src="assets/images/general/ieeg.jpg" 
+                                        width="200px">
+                            </div>
+                            <div fxFlex="60"
+                                    fxFlex.md="60"
+                                    fxFlex.sm="60">
+                                    <h1 class="ieeg"><strong>{{autoridad.datos_generales.pregunta_2 | uppercase}}</strong></h1>
+                                    <p class="justificado">
+                                        {{autoridad.datos_generales.respuesta_2}}
+                                    </p>
+                                    
+                                
+                            </div>
+                        </div>
+                    </p-card>
+                    
+                </div>
+
+                <div fxFlex="90"
+                     fxFlex.md="90"
+                     fxFlex.sm="100"
+                     class="p-panel">
+
+                    <p-card *ngIf="autoridad.datos_generales.pregunta_3">
+                        <div fxLayout="row wrap"
+                        fxLayout.xs="column"
+                        fxLayoutAlign="center"
+                        fxLayoutGap="20px">
+                            <div fxFlex="30"
+                                    fxFlex.md="30"
+                                    fxFlex.sm="30">
+
+                                <img src="assets/images/general/ieeg.jpg" 
+                                        width="200px">
+                            </div>
+                            <div fxFlex="60"
+                                    fxFlex.md="60"
+                                    fxFlex.sm="60">
+                                    <h1 class="ieeg"><strong>{{autoridad.datos_generales.pregunta_3 | uppercase}}</strong></h1>
+                                    <p class="justificado">
+                                        {{autoridad.datos_generales.respuesta_3}}
+                                    </p>
+                                    
+                                
+                            </div>
+                        </div>
+                    </p-card>
+                    
+                </div>
+                <div fxFlex="90"
+                     fxFlex.md="90"
+                     fxFlex.sm="100"
+                     class="p-panel">
+
+                    <p-card *ngIf="autoridad.datos_generales.pregunta_4">
+                        <div fxLayout="row wrap"
+                        fxLayout.xs="column"
+                        fxLayoutAlign="center"
+                        fxLayoutGap="20px">
+                            <div fxFlex="30"
+                                    fxFlex.md="30"
+                                    fxFlex.sm="30">
+
+                                <img src="assets/images/general/ieeg.jpg" 
+                                        width="200px">
+                            </div>
+                            <div fxFlex="60"
+                                    fxFlex.md="60"
+                                    fxFlex.sm="60">
+                                    <h1 class="ieeg"><strong>{{autoridad.datos_generales.pregunta_4 | uppercase}}</strong></h1>
+                                    <p class="justificado">
+                                        {{autoridad.datos_generales.respuesta_4}}
+                                    </p>
+                                    
+                                
+                            </div>
+                        </div>
+                    </p-card>
+                    
+                </div>
+                </div>
+         </div>       
+                        
+                    
+
+    </div>
+</ng-template>

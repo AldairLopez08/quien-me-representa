@@ -1,0 +1,153 @@
+<mat-card class="estilo">
+    <mat-card-header>
+        <img mat-card-avatar [src]="autoridad | imagen" class="animate__animated animate__zoomIn">
+        <mat-card-title>
+            {{autoridad.nombre}}
+        </mat-card-title>
+        <mat-card-subtitle class="estilo">
+            {{autoridad.cargo}}
+            <br>
+            <h4 [class]="autoridad.partido_politico.nombre_partido">
+                <strong>{{autoridad.partido_politico.nombre_partido}}</strong>
+            </h4> 
+            
+        </mat-card-subtitle>
+
+    </mat-card-header>
+    <mat-card-content>
+            <i class="pi pi-clock ieeg"></i>
+            <strong> Periodo del cargo: </strong>
+            <p>{{autoridad.periodo_cargo}}</p>
+            <i class="pi pi-phone ieeg"></i>
+            <strong> Telefono de oficina: </strong>
+            <p>{{autoridad.Telefono}}</p>
+            <i class="pi pi-envelope ieeg"></i>
+            <strong> Correo electronico laboral: </strong>
+            <p>{{autoridad.correo_electronico}}</p>
+            <i class="pi pi-list ieeg"></i>
+            <strong> Comisiones a que pertenece: </strong>
+            <ul *ngIf="autoridad.autoridad == 'Diputaciones Federales'">
+               <strong *ngIf="autoridad.comision_1" class="ieeg">ORDINARIA</strong>
+                <li *ngIf="autoridad.comision_1">{{autoridad.comision_1}}</li>
+                <li *ngIf="autoridad.comision_2">{{autoridad.comision_2}}</li>
+                <li *ngIf="autoridad.comision_3">{{autoridad.comision_3}}</li>
+                <strong class="ieeg">GRUPO DE AMISTAD</strong>
+                <li *ngIf="autoridad.comision_4">{{autoridad.comision_4}}</li>
+                <li *ngIf="autoridad.comision_5">{{autoridad.comision_5}}</li>
+                <li *ngIf="autoridad.comision_6">{{autoridad.comision_6}}</li>
+            </ul>
+            <ul *ngIf="autoridad.autoridad != 'Diputaciones Federales'" >
+                <li *ngIf="autoridad.comision_1">{{autoridad.comision_1}}</li>
+                <li *ngIf="autoridad.comision_2">{{autoridad.comision_2}}</li>
+                <li *ngIf="autoridad.comision_3">{{autoridad.comision_3}}</li>
+                <li *ngIf="autoridad.comision_4">{{autoridad.comision_4}}</li>
+                <li *ngIf="autoridad.comision_5">{{autoridad.comision_5}}</li>
+                <li *ngIf="autoridad.comision_6">{{autoridad.comision_6}}</li>
+                <li *ngIf="autoridad.comision_7">{{autoridad.comision_7}}</li>
+                <li *ngIf="autoridad.comision_8">{{autoridad.comision_8}}</li>
+            </ul>
+            <i class="pi pi-map-marker ieeg"></i>
+            <strong> Dirección de oficina: </strong>{{autoridad.direccion}}
+            <br><br>
+            <button (click)="showDialog(true)" mat-stroked-button color="primary">Mapa 
+                <span class="pi pi-map-marker"></span>
+            </button>
+        
+    </mat-card-content>
+    <mat-divider inset></mat-divider>
+    
+    <mat-card-actions>
+        <a [href]="autoridad.redes_sociales.facebook" target="_blank">
+            <button mat-button *ngIf="autoridad.redes_sociales.facebook">
+                <i class="pi pi-facebook facebook"></i>
+            </button>
+        </a> 
+        <a [href]="autoridad.redes_sociales.twitter" target="_blank">
+            <button mat-button *ngIf="autoridad.redes_sociales.twitter">
+                <i class="pi pi-twitter twitter"></i>
+            </button>
+        </a>
+        <a [href]="autoridad.redes_sociales.instagram" target="_blank">
+            <button mat-button *ngIf="autoridad.redes_sociales.instagram">
+                <i class="pi pi-instagram instagram"></i>
+            </button>
+        </a>       
+        <a [href]="autoridad.redes_sociales.youtube" target="_blank">
+            <button mat-button *ngIf="autoridad.redes_sociales.youtube">
+                <i class="pi pi-youtube youtube"></i>
+            </button>
+        </a> 
+        <!-- <a [href]="autoridad.redes_sociales.portal_personal" target="_blank">
+            <button mat-button *ngIf="autoridad.redes_sociales.portal_personal">
+                <i class="pi pi-globe"></i>
+            </button>
+        </a> -->
+        
+        <button mat-stroked-button color="primary"
+                [routerLink]="['/autoridades',autoridad.id]">Saber más
+        </button>
+    </mat-card-actions>
+</mat-card>
+
+<p-sidebar [(visible)]="display" position="left">
+    <div class="estilo centrado">
+            <h1 class="ieeg" *ngIf="autoridad.cargo_Gobernador == 1">
+                Gubernatura
+            </h1>
+            <h1 class="ieeg" *ngIf="autoridad.cargo_Municipio == ayuntamientos.id_municipio">
+                Ayuntamiento
+            </h1>
+            <h1 class="ieeg" *ngIf="autoridad.cargo_Diputado_Local == ayuntamientos.id_distrito_local">
+                Distrito Local
+            </h1>
+            <h1 class="ieeg" *ngIf="autoridad.cargo_Diputado_Federal == ayuntamientos.id_distrito_federal">
+                Distrito Federal
+            </h1>
+            <h1 class="ieeg" *ngIf="autoridad.cargo_Senador == 1">
+                Senaduría
+            </h1>
+            <h1 class="ieeg" *ngIf="autoridad.cargo_Presidente == 1">
+                Presidencia de la república
+            </h1>
+            <h1 class="ieeg" *ngIf="autoridad.cargo_Diputado_Federal == 16">
+                Circunscripciones Plurinominales
+            </h1>
+            
+        </div>
+    <div class="derecha">
+        <p-chip styleClass="mr-2 custom-chip">
+            Sección. &nbsp;{{ayuntamientos.id}}
+        </p-chip> 
+    </div>
+    
+    <div class="grid">
+            <div class="col-12" *ngIf="autoridad.cargo_Gobernador == 1 ||
+            autoridad.cargo_Senador == 1 || 
+            autoridad.cargo_Presidente == 1 || 
+            autoridad.cargo_Diputado_Federal == 16">
+                <p-card legend="Ayuntamientos">
+                    <app-mapa-estado></app-mapa-estado>
+                </p-card>
+                <br><p class="justificado">El mapa resalta la distribución territorial por número de sección</p> 
+            </div>
+            <div class="col-12" *ngIf="autoridad.cargo_Municipio == ayuntamientos.id_municipio">
+                <p-card legend="Ayuntamientos">
+                    <app-mapa-ayuntamiento [ayuntamientos]="ayuntamientos"></app-mapa-ayuntamiento>
+                </p-card>
+                <br><p class="justificado">El mapa resalta la distribución territorial por número de sección</p> 
+            </div>
+            <div class="col-12" *ngIf="autoridad.cargo_Diputado_Local == ayuntamientos.id_distrito_local">
+                <p-card legend="Distritos Locales"  >
+                    <app-mapa-distrito-local [ayuntamientos]="ayuntamientos"></app-mapa-distrito-local>
+                </p-card>
+                <br><p class="justificado">El mapa resalta la distribución territorial por número de sección</p> 
+            </div>
+            <div class="col-12" *ngIf="autoridad.cargo_Diputado_Federal == ayuntamientos.id_distrito_federal">
+                <p-card legend="Distritos Federales"  >
+                    <app-mapa-distrito-federal [ayuntamientos]="ayuntamientos"></app-mapa-distrito-federal>
+                </p-card>
+                <br><p class="justificado">El mapa resalta la distribución territorial por número de sección</p> 
+            </div> 
+    </div>
+    
+</p-sidebar>

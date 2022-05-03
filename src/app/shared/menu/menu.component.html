@@ -1,0 +1,173 @@
+<p-sidebar [(visible)]="visibleSidebar1" 
+           position="right">
+
+        <div class="estilo animate__animated animate__zoomIn">
+                <img *ngIf="theme" src="assets/images/logos/logoColor2.png" width="170">
+                <img *ngIf="!theme" src="assets/images/logos/logo_light.png" width="190">
+        </div> 
+        <br> 
+        <mat-card class="mat-card">
+                <mat-card-header>
+                        <h2>Temas:</h2>
+                </mat-card-header>
+                <mat-card-content>  
+                        <div fxLayout="column">
+                        <button mat-button
+                                (click)="changeTheme('saga-purple')"
+                                class="left">
+                                <i class="pi pi-slack estilo-claro" style="font-size: 1.5rem"></i>
+                                <span> Claro</span>
+                        </button>
+
+                        <button mat-button
+                                (click)="changeTheme('bootstrap4-light-purple')"
+                                class="left">
+                                <i class="pi pi-slack estilo-clasico" style="font-size: 1.5rem"></i>
+                                <span> Clásico</span>
+                        </button>
+                        <button mat-button
+                                (click)="changeTheme('bootstrap4-dark-purple')"
+                                class="left">
+                                <i class="pi pi-slack estilo-dark" style="font-size: 1.5rem"></i>
+                                <span> Oscuro</span>
+                        </button>
+                        <button mat-button
+                                (click)="changeTheme('vela-purple')"
+                                class="left">
+                                <i class="pi pi-slack estilo-vela" style="font-size: 1.5rem"></i>
+                                <span> Frío</span>
+                        </button>
+                        </div>
+                </mat-card-content>
+        </mat-card>
+        <br>
+        <mat-card class="mat-card">
+                <mat-card-header>
+                        <h2>Síguenos:</h2>
+                </mat-card-header>
+                <mat-card-content>
+                        <a href="https://www.facebook.com/IEEGTO/" target="_blank">
+                                <button mat-button>
+                                        <i class="pi pi-facebook facebook" style="font-size: 1.5rem"></i>
+                                        <span class="text-layout"> Facebook</span>
+                                </button>
+                        </a>
+                        <a href="https://twitter.com/IEEG" target="_blank">
+                                <button mat-button>
+                                        <i class="pi pi-twitter twitter" style="font-size: 1.5rem"></i>
+                                        <span class="text-layout"> Twitter</span>
+                                </button>
+                        </a>
+                        <a href="https://www.youtube.com/user/IEEGTV" target="_blank">
+                                <button mat-button>
+                                        <i class="pi pi-youtube youtube" style="font-size: 1.5rem"></i>
+                                        <span class="text-layout"> YouTube</span>
+                                </button>
+                        </a>
+                        <a href="https://www.instagram.com/ieeguanajuato/" target="_blank">
+                                <button mat-button>
+                                        <i class="pi pi-instagram instagram" style="font-size: 1.5rem"></i>
+                                        <span class="text-layout"> Instagram</span>
+                                </button>
+                        </a>
+                        
+                        
+                        
+                </mat-card-content>
+        </mat-card>
+</p-sidebar>
+
+
+<header *ngIf="theme">
+        <div class="text-layout estilo clasico" 
+        fxLayout="row wrap"
+        fxLayout.xs="column">
+                <div fxFlex="15" class="animate__animated animate__zoomIn">
+                        <img src="assets/images/logos/logo_light.png" width="120">
+                        <!-- <img *ngIf="theme" src="assets/images/logos/logoColor2.png" width="170">
+                        <img *ngIf="!theme" src="assets/images/logos/logo_light.png" width="190"> -->
+                </div>  
+                <div fxFlex="85">
+                        <h1 class="titulo">
+                                ¿Quién me representa?
+                        </h1>
+                </div>     
+        </div>
+</header>
+
+<header *ngIf="!theme">
+        <div class="text-layout estilo" 
+        fxLayout="row wrap"
+        fxLayout.xs="column">
+                <div fxFlex="15" class="animate__animated animate__zoomIn">
+                        <img src="assets/images/logos/logo_light.png" width="120">
+                        <!-- <img *ngIf="theme" src="assets/images/logos/logoColor2.png" width="170">
+                        <img *ngIf="!theme" src="assets/images/logos/logo_light.png" width="190"> -->
+                </div>  
+                <div fxFlex="85">
+                        <h1><strong>
+                                ¿Quién me representa?
+                        </strong></h1>
+                </div>     
+        </div>
+</header>
+<br><br>
+
+<p-menubar [model]="items">
+
+        <form (ngSubmit)="buscarSeccion()" [formGroup]="seccion">
+                <div class="p-inputgroup">
+                        <button type="submit" 
+                                pButton pRipple 
+                                label="Buscar"
+                                [disabled]="seccion.invalid"
+                                [routerLink]="['./autoridades/secciones',seccion.controls?.['numeroSeccion']?.value]"
+                                >
+                        </button>
+
+                        <input class="seccion"
+                               type="number"
+                               formControlName="numeroSeccion"
+                               pInputText
+                               min="1"
+                               placeholder="Ejemplo: 821">
+
+                        <span (click)="showDialog(true)" 
+                              class="p-inputgroup-addon pi pi-question-circle pointer parpadea"
+                              id="informacionSeccion">
+                        </span>
+                </div>
+
+                <span class="text-danger" *ngIf="seccionValida()">
+                        No existe la sección
+                </span> 
+        </form>
+</p-menubar>
+<!-- <div>
+        <h1>Sección: {{ayuntamientoSeccion}}</h1>        
+</div> -->
+
+<p-dialog [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+        <ng-template pTemplate="header">
+                <h1>Sección Electoral</h1>
+        </ng-template>
+        <p>Identifica el modelo de tu credencial y ubica tu sección.</p>
+        <ng-template pTemplate="footer">
+                <button pButton (click)="showDialog(false)" label="Cerrar"></button>
+        </ng-template>
+        <div class="grid">
+                <div class="col-6">
+                        <img src="assets/images/seccion/Credencial-A.svg" width="85%">
+                </div>
+                <div class="col-6">
+                        <img src="assets/images/seccion/Credencial-B.svg" width="85%">  
+                </div>
+                <div class="col-6">
+                        <img src="assets/images/seccion/Credencial-C.svg" width="85%">  
+                </div>
+                <div class="col-6">
+                        <img src="assets/images/seccion/Credencial-D.svg" width="85%">  
+                </div>    
+        </div>
+        
+</p-dialog>

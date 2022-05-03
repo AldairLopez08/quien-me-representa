@@ -1,0 +1,76 @@
+.estilo-claro{
+    color: #65174a; 
+    text-align: center;
+}
+.estilo-clasico{
+    color: #e12362;
+}
+.estilo-dark{
+    color: black;
+}
+.estilo-vela{
+    color: #17212f;
+}
+.seccion{
+    border-color: var(--primary-color);
+}
+.estilo{
+    text-align: center;
+    align-items: center;  
+}
+.left{
+    text-align:left;
+}
+.mat-card{
+    background: var( --surface-d);
+    color: var(--text-color);
+    
+}
+.clasico{
+    color: white;
+    background-color: #65174a;   
+}
+.pointer{
+    cursor: pointer;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-color: var(--surface-b);
+    
+}
+.titulo{
+    font-family: Roboto-Regular,sans-serif;
+}
+.text-danger{
+    color: #dc3545;
+}
+.parpadea {
+
+animation-name: parpadeo;
+animation-duration: 4s;
+animation-timing-function: linear;
+animation-iteration-count:initial;
+
+
+-webkit-animation-name:parpadeo;
+-webkit-animation-duration: 4s;
+-webkit-animation-timing-function: linear;
+-webkit-animation-iteration-count: infinite;
+}
+
+@-moz-keyframes parpadeo{  
+0% { opacity: 1.0; }
+50% { opacity: 0.0; }
+100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes parpadeo {  
+0% { opacity: 1.0; }
+50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes parpadeo {  
+0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+100% { opacity: 1.0; }
+}

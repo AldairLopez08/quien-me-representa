@@ -1,0 +1,129 @@
+<div><br></div>
+<mat-grid-list cols="1" *ngIf="!ayuntamientos; else divAyuntamiento">
+    <mat-grid-tile>
+        <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #divAyuntamiento>
+    
+    <div fxLayout="row wrap"
+         fxLayout.md="row"
+         fxLayout.sm="row"
+         fxLayout.xs="column"
+         class="text-layout"
+         >
+    
+        <div fxFlex="100"
+             fxFlex.md="100"
+             fxFlex.sm="100">
+             <h1>Autoridades</h1>  
+             <app-buscar></app-buscar>
+             <div class="centrado">
+                <p-chip styleClass="mr-2 custom-chip">
+                    Sección. {{ayuntamientos.id}}
+                </p-chip> 
+                <p-button (click)="showDialog(true)" styleClass="mr-2 custom-chip">
+                    Ayuntamiento: {{ayuntamientos.id_municipio}}. {{ayuntamientos.municipio_nombre | titlecase}}
+                </p-button>
+                <p-button (click)="showDialogDipLocal(true)" styleClass="mr-2 custom-chip">
+                    Distrito Local: {{ayuntamientos.id_distrito_local}}. {{ayuntamientos.distrito_local_nombre | titlecase}}
+                </p-button>
+                <p-button (click)="showDialogDipFederal(true)" styleClass="mr-2 custom-chip">
+                    Distrito Federal: {{ayuntamientos.id_distrito_federal}}. {{ayuntamientos.distrito_federal | titlecase}}
+                </p-button>  
+            </div>     
+            <br>
+            
+            <div fxLayout="row wrap"
+                 fxLayout.xs="column"
+                 fxLayoutAlign="center"
+                 fxLayoutGap="20px">
+                 
+                 <div fxFlex="30"
+                 fxFlex.md="45"
+                 fxFlex.sm="100"
+                 *ngFor="let autoridad of autoridades"
+                 class="eliminar">
+
+                <app-autoridad-tarjeta 
+                    *ngIf="autoridad.cargo_Municipio == ayuntamientos.id_municipio ||
+                    autoridad.cargo_Gobernador == 1 ||
+                    autoridad.cargo_Senador == 1    ||
+                    autoridad.cargo_Presidente == 1 ||
+                    autoridad.cargo_Diputado_Local == ayuntamientos.id_distrito_local ||
+                    autoridad.cargo_Diputado_Federal == ayuntamientos.id_distrito_federal ||
+                    autoridad.cargo_Diputado_Federal == 16"
+                    [autoridad]="autoridad" [ayuntamientos]="ayuntamientos" >
+                </app-autoridad-tarjeta>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        
+    </div>
+</ng-template>
+
+<p-sidebar [(visible)]="display" position="left" *ngIf="ayuntamientos">
+    <div class="estilo centrado">
+            <h1 class="ieeg">
+                Ayuntamiento
+            </h1>
+        </div>
+        <div class="derecha">
+            <p-chip styleClass="mr-2 custom-chip">
+                Sección. {{ayuntamientos.id}}
+            </p-chip> 
+        </div>
+        <div>
+            <p-card legend="Ayuntamientos">
+                <app-mapa-ayuntamiento [ayuntamientos]="ayuntamientos"></app-mapa-ayuntamiento>
+            </p-card>
+            <br><p class="justificado">El mapa resalta la distribución territorial por número de sección</p>
+    </div>
+
+</p-sidebar>
+
+<p-sidebar [(visible)]="dipLocal" position="left" *ngIf="ayuntamientos">
+    <div class="estilo centrado">
+            <h1 class="ieeg">
+                Distrito Local
+            </h1>
+    </div>
+    <div class="derecha">
+        <p-chip styleClass="mr-2 custom-chip">
+            Sección. {{ayuntamientos.id}}
+        </p-chip> 
+    </div>
+    <div>
+        <p-card legend="Distritos Locales"  >
+            <app-mapa-distrito-local [ayuntamientos]="ayuntamientos"></app-mapa-distrito-local>
+        </p-card>
+        <br><p class="justificado">El mapa resalta la distribución territorial por número de sección</p>
+    </div>
+
+</p-sidebar>
+
+<p-sidebar [(visible)]="dipFederal" position="left" *ngIf="ayuntamientos">
+    <div class="estilo centrado">
+            <h1 class="ieeg">
+                Distrito Federal
+            </h1>
+    </div>
+    <div class="derecha">
+        <p-chip styleClass="mr-2 custom-chip">
+            Sección. {{ayuntamientos.id}}
+        </p-chip> 
+    </div>
+    <div>
+        <p-card legend="Distritos Federales"  >
+            <app-mapa-distrito-federal [ayuntamientos]="ayuntamientos"></app-mapa-distrito-federal>
+        </p-card>
+        <br><p class="justificado">El mapa resalta la distribución territorial por número de sección</p>
+
+    </div>
+
+</p-sidebar>
